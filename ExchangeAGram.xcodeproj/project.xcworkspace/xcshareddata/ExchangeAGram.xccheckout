@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>E621DF60-6FEE-4AF7-9CC8-930026F556DA</string>
+	<key>IDESourceControlProjectName</key>
+	<string>ExchangeAGram</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>7AC190B92FDBF759A5832B9F046E7159F733A98A</key>
+		<string>https://github.com/iamtonyarmstrong/ExchangeAGram.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>ExchangeAGram.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>7AC190B92FDBF759A5832B9F046E7159F733A98A</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/iamtonyarmstrong/ExchangeAGram.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>7AC190B92FDBF759A5832B9F046E7159F733A98A</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7AC190B92FDBF759A5832B9F046E7159F733A98A</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ExchangeAGram</string>
+		</dict>
+	</array>
+</dict>
+</plist>
