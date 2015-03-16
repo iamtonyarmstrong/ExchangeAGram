@@ -2,7 +2,13 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qUk-pT-gu3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="exljbris - MuseoSans-300.otf">
+            <string>MuseoSans-300</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Feed View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -16,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ohU-Om-GbP">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ohU-Om-GbP">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EVh-Hm-08D">
                                     <size key="itemSize" width="150" height="150"/>
@@ -32,18 +38,30 @@
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NFW-YO-h6R">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NFW-YO-h6R">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5p-G5-Izc">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5p-G5-Izc">
                                                     <rect key="frame" x="8" y="121" width="134" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="ZFt-eG-xZZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="15"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="NFW-YO-h6R" firstAttribute="centerX" secondItem="i5p-G5-Izc" secondAttribute="centerX" id="3Oc-pT-eCL"/>
+                                            <constraint firstItem="NFW-YO-h6R" firstAttribute="leading" secondItem="h9c-Wp-OZ9" secondAttribute="leading" id="CQ6-UQ-6J4"/>
+                                            <constraint firstAttribute="bottom" secondItem="NFW-YO-h6R" secondAttribute="bottom" id="CYt-Ei-AXM"/>
+                                            <constraint firstItem="i5p-G5-Izc" firstAttribute="leading" secondItem="h9c-Wp-OZ9" secondAttribute="leadingMargin" id="U1C-ZG-RCb"/>
+                                            <constraint firstItem="i5p-G5-Izc" firstAttribute="bottom" secondItem="h9c-Wp-OZ9" secondAttribute="bottomMargin" id="ggo-Pm-ehf"/>
+                                            <constraint firstItem="NFW-YO-h6R" firstAttribute="top" secondItem="h9c-Wp-OZ9" secondAttribute="top" id="hNx-Sj-kdh"/>
+                                            <constraint firstAttribute="trailing" secondItem="NFW-YO-h6R" secondAttribute="trailing" id="l39-w9-G1l"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="cellImage" destination="NFW-YO-h6R" id="2BS-Ap-zoR"/>
                                             <outlet property="cellLabel" destination="i5p-G5-Izc" id="80R-Dp-ZC3"/>
@@ -57,9 +75,19 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ohU-Om-GbP" secondAttribute="trailing" id="2uV-bU-s6A"/>
+                            <constraint firstItem="ohU-Om-GbP" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="ET2-Fk-yO7"/>
+                            <constraint firstItem="ohU-Om-GbP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QQ1-Kw-0Kz"/>
+                            <constraint firstItem="ohU-Om-GbP" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="S78-E0-M1f"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="M0w-5I-cpZ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="K1L-4U-IRZ"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="K1L-4U-IRZ">
+                            <connections>
+                                <action selector="snapBarButtonItemTapped:" destination="BYZ-38-t0r" id="imi-My-zyv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="ohU-Om-GbP" id="wV8-mH-9KL"/>

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -33,10 +34,43 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var cell:UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as UICollectionViewCell
 
-        return UICollectionViewCell()
+        return cell
     }
-    
+
+    // MARK: - Actions
+
+    @IBAction func snapBarButtonItemTapped(sender: UIBarButtonItem) {
+
+         // How to create the Camera
+        if(UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
+            var cameraController = UIImagePickerController()
+            cameraController.delegate = self
+            cameraController.sourceType = UIImagePickerControllerSourceType.Camera
+            let mediaTypes = [kUTTypeImage]   //Grab the media types -> Images
+            cameraController.mediaTypes = mediaTypes    //set the Media Types
+            cameraController.allowsEditing = true      //No editing for now
+
+            self.presentViewController(cameraController, animated: true, completion: nil)   //show the camera
+
+        } else if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)){
+            var photoLibraryController = UIImagePickerController()
+            photoLibraryController.delegate = self
+            photoLibraryController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+            let mediaTypes = [kUTTypeImage]
+            photoLibraryController.mediaTypes = mediaTypes
+            photoLibraryController.allowsEditing = false
+
+            self.presentViewController(photoLibraryController, animated: true, completion: nil)
+
+        } else {
+            var alertController = UIAlertController(title: "Alert", message: "Your device does not support the camera or photo library", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
 
     /*
     // MARK: - Navigation
