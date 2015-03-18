@@ -13,12 +13,20 @@ import CoreData
 class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    lazy var moc = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+
+    let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+    let moc = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+
+    var feedArray:[AnyObject] = []
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        let request = NSFetchRequest(entityName: "FeedItem")
+        feedArray = self.moc!.executeFetchRequest(request, error: nil)!
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,7 +36,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     // MARK: - UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
+        return self.feedArray.count
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -36,7 +44,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell:UICollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as UICollectionViewCell
+        var cell:FeedCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as FeedCollectionViewCell
+
+        let thisItem = feedArray[indexPath.row] as FeedItem
+        cell.cellLabel.text = thisItem.caption
+        cell.cellImage.image = UIImage(data: thisItem.image)
 
         return cell
     }
@@ -52,7 +64,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
             cameraController.sourceType = UIImagePickerControllerSourceType.Camera
             let mediaTypes = [kUTTypeImage]   //Grab the media types -> Images
             cameraController.mediaTypes = mediaTypes    //set the Media Types
-            cameraController.allowsEditing = true      //No editing for now
+            cameraController.allowsEditing = false      //No editing for now
 
             self.presentViewController(cameraController, animated: true, completion: nil)   //show the camera
 
@@ -79,14 +91,16 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
         let imageData = UIImageJPEGRepresentation(image, 1.0)       //Convert the image data into a JPEG
 
         // Do Core Data stuff...
-        let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: self.moc!)
+        let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: moc!)
         let feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: self.moc)
 
         feedItem.image = imageData!
         feedItem.caption = "Test Caption"
+        self.appDelegate.saveContext()
 
-        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
-
+        // Add the new image to the array, then force UI to update the dimiss the Image Picker Controller
+        self.feedArray.append(feedItem)
+        self.collectionView.reloadData()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
