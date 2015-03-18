@@ -8,10 +8,12 @@
 
 import UIKit
 import MobileCoreServices
+import CoreData
 
 class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    lazy var moc = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +72,22 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        let image = info[UIImagePickerControllerOriginalImage] as UIImage
+        let imageData = UIImageJPEGRepresentation(image, 1.0)       //Convert the image data into a JPEG
+
+        // Do Core Data stuff...
+        let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: self.moc!)
+        let feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: self.moc)
+
+        feedItem.image = imageData!
+        feedItem.caption = "Test Caption"
+
+        (UIApplication.sharedApplication().delegate as AppDelegate).saveContext()
+
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
 
     /*
