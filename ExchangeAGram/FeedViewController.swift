@@ -36,19 +36,23 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     // MARK: - UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return self.feedArray.count
+        return 1
     }
 
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return self.feedArray.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell:FeedCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as FeedCollectionViewCell
 
         let thisItem = feedArray[indexPath.row] as FeedItem
-        cell.cellLabel.text = thisItem.caption
+
+        print(thisItem.caption)
+
+        cell.cellCaption.text = thisItem.caption
         cell.cellImage.image = UIImage(data: thisItem.image)
+
 
         return cell
     }

@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qUk-pT-gu3">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="exljbris - MuseoSans-300.otf">
@@ -38,33 +37,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="116" height="115"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5p-G5-Izc">
-                                                    <rect key="frame" x="8" y="86" width="100" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="ZFt-eG-xZZ"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="15"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NFW-YO-h6R">
                                                     <rect key="frame" x="0.0" y="0.0" width="116" height="115"/>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zU7-f4-kFw">
+                                                    <rect key="frame" x="8" y="86" width="100" height="21"/>
+                                                    <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="13"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="NFW-YO-h6R" firstAttribute="centerX" secondItem="i5p-G5-Izc" secondAttribute="centerX" id="3Oc-pT-eCL"/>
                                             <constraint firstItem="NFW-YO-h6R" firstAttribute="leading" secondItem="h9c-Wp-OZ9" secondAttribute="leading" id="CQ6-UQ-6J4"/>
                                             <constraint firstAttribute="bottom" secondItem="NFW-YO-h6R" secondAttribute="bottom" id="CYt-Ei-AXM"/>
-                                            <constraint firstItem="i5p-G5-Izc" firstAttribute="leading" secondItem="h9c-Wp-OZ9" secondAttribute="leadingMargin" id="U1C-ZG-RCb"/>
-                                            <constraint firstItem="i5p-G5-Izc" firstAttribute="bottom" secondItem="h9c-Wp-OZ9" secondAttribute="bottomMargin" id="ggo-Pm-ehf"/>
                                             <constraint firstItem="NFW-YO-h6R" firstAttribute="top" secondItem="h9c-Wp-OZ9" secondAttribute="top" id="hNx-Sj-kdh"/>
                                             <constraint firstAttribute="trailing" secondItem="NFW-YO-h6R" secondAttribute="trailing" id="l39-w9-G1l"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="cellCaption" destination="zU7-f4-kFw" id="YPx-cf-o1S"/>
                                             <outlet property="cellImage" destination="NFW-YO-h6R" id="2BS-Ap-zoR"/>
-                                            <outlet property="cellLabel" destination="i5p-G5-Izc" id="80R-Dp-ZC3"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

@@ -11,5 +11,5 @@ import UIKit
 class FeedCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var cellImage: UIImageView!
-    @IBOutlet weak var cellLabel: UILabel!
+    @IBOutlet weak var cellCaption: UILabel!
 }
