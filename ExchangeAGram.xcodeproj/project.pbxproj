@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		454F33D11AB90FB1001EF6D9 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F33D01AB90FB1001EF6D9 /* FeedItem.swift */; };
+		45B3F1C01ABBAD5700CAEA3A /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B3F1BF1ABBAD5700CAEA3A /* FilterViewController.swift */; };
 		45F7E0741AB4A7D800A96AAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F7E0731AB4A7D800A96AAF /* AppDelegate.swift */; };
 		45F7E0771AB4A7D800A96AAF /* ExchangeAGram.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45F7E0751AB4A7D800A96AAF /* ExchangeAGram.xcdatamodeld */; };
 		45F7E07C1AB4A7D800A96AAF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F7E07A1AB4A7D800A96AAF /* Main.storyboard */; };
@@ -30,7 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		454F33D01AB90FB1001EF6D9 /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		454F33D01AB90FB1001EF6D9 /* FeedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedItem.swift; path = ../FeedItem.swift; sourceTree = "<group>"; };
+		45B3F1BF1ABBAD5700CAEA3A /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		45F7E06E1AB4A7D800A96AAF /* ExchangeAGram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExchangeAGram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F7E0721AB4A7D800A96AAF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45F7E0731AB4A7D800A96AAF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,7 +74,6 @@
 		45F7E0651AB4A7D800A96AAF = {
 			isa = PBXGroup;
 			children = (
-				454F33D01AB90FB1001EF6D9 /* FeedItem.swift */,
 				45F7E09E1AB602EE00A96AAF /* MobileCoreServices.framework */,
 				45F7E0701AB4A7D800A96AAF /* ExchangeAGram */,
 				45F7E0891AB4A7D800A96AAF /* ExchangeAGramTests */,
@@ -92,10 +93,8 @@
 		45F7E0701AB4A7D800A96AAF /* ExchangeAGram */ = {
 			isa = PBXGroup;
 			children = (
-				45F7E09A1AB600D900A96AAF /* exljbris - MuseoSans-100.otf */,
-				45F7E09B1AB600D900A96AAF /* exljbris - MuseoSans-100Italic.otf */,
-				45F7E09C1AB600D900A96AAF /* exljbris - MuseoSans-300.otf */,
-				45F7E09D1AB600D900A96AAF /* exljbris - MuseoSans-500.otf */,
+				45B3F1BF1ABBAD5700CAEA3A /* FilterViewController.swift */,
+				454F33D01AB90FB1001EF6D9 /* FeedItem.swift */,
 				45F7E0731AB4A7D800A96AAF /* AppDelegate.swift */,
 				45F7E0981AB4C53200A96AAF /* FeedCollectionViewCell.swift */,
 				45F7E0961AB4B69A00A96AAF /* FeedViewController.swift */,
@@ -103,6 +102,10 @@
 				45F7E07D1AB4A7D800A96AAF /* Images.xcassets */,
 				45F7E07F1AB4A7D800A96AAF /* LaunchScreen.xib */,
 				45F7E0751AB4A7D800A96AAF /* ExchangeAGram.xcdatamodeld */,
+				45F7E09A1AB600D900A96AAF /* exljbris - MuseoSans-100.otf */,
+				45F7E09B1AB600D900A96AAF /* exljbris - MuseoSans-100Italic.otf */,
+				45F7E09C1AB600D900A96AAF /* exljbris - MuseoSans-300.otf */,
+				45F7E09D1AB600D900A96AAF /* exljbris - MuseoSans-500.otf */,
 				45F7E0711AB4A7D800A96AAF /* Supporting Files */,
 			);
 			path = ExchangeAGram;
@@ -233,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45B3F1C01ABBAD5700CAEA3A /* FilterViewController.swift in Sources */,
 				45F7E0741AB4A7D800A96AAF /* AppDelegate.swift in Sources */,
 				45F7E0971AB4B69A00A96AAF /* FeedViewController.swift in Sources */,
 				45F7E0991AB4C53200A96AAF /* FeedCollectionViewCell.swift in Sources */,

@@ -46,15 +46,30 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var cell:FeedCollectionViewCell = collectionView.dequeueReusableCellWithReuseIdentifier("feedCell", forIndexPath: indexPath) as FeedCollectionViewCell
 
-        let thisItem = feedArray[indexPath.row] as FeedItem
+        let thisItem = feedArray[indexPath.item] as FeedItem
 
-        print(thisItem.caption)
+        //print("\(indexPath.item): " + thisItem.caption)
 
         cell.cellCaption.text = thisItem.caption
         cell.cellImage.image = UIImage(data: thisItem.image)
 
 
         return cell
+    }
+
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let feedItem:FeedItem = feedArray[indexPath.item] as FeedItem
+
+
+        println("\(indexPath.item): " + feedItem.caption)
+
+        var filterVC:FilterViewController = FilterViewController()
+        filterVC.thisFeedItem = feedItem
+
+        // Now, call the new view controller using code
+        self.navigationController?.pushViewController(filterVC, animated: false)     // this is an optional because you might not be inside a NavigationController
+
+
     }
 
     // MARK: - Actions
