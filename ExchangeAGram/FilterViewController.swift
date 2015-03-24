@@ -28,6 +28,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.collectionView.delegate = self
         self.collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(self.collectionView)
+        self.collectionView.registerClass(FilterCell.self, forCellWithReuseIdentifier: "myCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,11 +39,15 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
 
     // MARK: - CollectionView dataSource Methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 0
+        return 2
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell:FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("myCell", forIndexPath: indexPath) as FilterCell
+        
+        cell.imageView.image = UIImage(named: "Placeholder.png")
+
+        return cell
     }
 
 }
