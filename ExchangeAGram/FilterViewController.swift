@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CoreImage
 
 class FilterViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     var thisFeedItem: FeedItem!
     var collectionView:UICollectionView!
+    let kIntensity = 0.7
 
 
     override func viewDidLoad() {
@@ -50,4 +52,37 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         return cell
     }
 
+
+    //MARK: - Helper Function
+    //UICollectionViewDataSource
+    func photoFilters() ->[CIFilter]{
+        var ciFilters:[CIFilter] = []
+
+        let blur = CIFilter(name: "CIGaussianBlur")
+        let instant = CIFilter(name: "CIPhotoEffectInstant")
+        let noir = CIFilter(name: "CIPhotoEffectNoir")
+        let transfer = CIFilter(name: "CIPhotoEffectTransfer")
+        let unsharpen = CIFilter(name: "CIUnsharpMask")
+        let monochrome = CIFilter(name: "CIColorMonochrome")
+        let colorControls = CIFilter(name: "CIColorControls")
+        let sepia = CIFilter(name:"CISepiaTone")
+        let colorClamp = CIFilter(name: "CIColorClamp")
+
+        colorControls.setValue(0.5, forKey: kCIInputSaturationKey)
+        sepia.setValue(kIntensity, forKey: kCIInputIntensityKey)
+        colorClamp.setValue(CIVector(x: 0.9, y: 0.9, z: 0.9), forKey: "inputMaxComponents")
+        colorClamp.setValue(CIVector(x: 0.2, y: 0.2, z: 0.2), forKey: "inputMinComponents")
+
+        let composite = CIFilter(name:"CIHardBlendMode")
+        composite.setValue(sepia.outputImage, forKey: kCIInputImageKey)
+
+        let vignette = CIFilter(name: "CIVignette")
+        vignette.setValue(composite.outputImage, forKey: kCIInputImageKey)
+        vignette.setValue(kIntensity*2, forKey: kCIInputIntensityKey)
+        vignette.setValue(kIntensity*30, forKey: kCIInputRadiusKey)
+
+        ciFilters = [blur, instant, noir, transfer, unsharpen, monochrome, colorControls, sepia, colorClamp, composite, vignette]
+
+        return ciFilters
+    }
 }
