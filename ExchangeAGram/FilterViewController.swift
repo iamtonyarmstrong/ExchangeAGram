@@ -14,6 +14,8 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
     var thisFeedItem: FeedItem!
     var collectionView:UICollectionView!
     let kIntensity = 0.7
+    var context:CIContext = CIContext(options: nil)
+    var filters:[CIFilter] = []
 
 
     override func viewDidLoad() {
@@ -31,6 +33,10 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.collectionView.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(self.collectionView)
         self.collectionView.registerClass(FilterCell.self, forCellWithReuseIdentifier: "myCell")
+
+        self.filters = photoFilters()
+        //println("Filter count: \(filters.count)")
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,22 +47,24 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
 
     // MARK: - CollectionView dataSource Methods
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return self.filters.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell:FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("myCell", forIndexPath: indexPath) as FilterCell
         
-        cell.imageView.image = UIImage(named: "Placeholder.png")
+        //cell.imageView.image = UIImage(named: "Placeholder.png")
+        cell.imageView.image = filteredImageFromImage(self.thisFeedItem.image, withFilterName: filters[indexPath.row])
 
+
+        
         return cell
     }
 
 
     //MARK: - Helper Function
     //UICollectionViewDataSource
-    func photoFilters() ->[CIFilter]{
-        var ciFilters:[CIFilter] = []
+    func photoFilters () -> [CIFilter] {
 
         let blur = CIFilter(name: "CIGaussianBlur")
         let instant = CIFilter(name: "CIPhotoEffectInstant")
@@ -65,24 +73,38 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         let unsharpen = CIFilter(name: "CIUnsharpMask")
         let monochrome = CIFilter(name: "CIColorMonochrome")
         let colorControls = CIFilter(name: "CIColorControls")
-        let sepia = CIFilter(name:"CISepiaTone")
-        let colorClamp = CIFilter(name: "CIColorClamp")
-
         colorControls.setValue(0.5, forKey: kCIInputSaturationKey)
+
+        let sepia = CIFilter(name: "CISepiaTone")
         sepia.setValue(kIntensity, forKey: kCIInputIntensityKey)
-        colorClamp.setValue(CIVector(x: 0.9, y: 0.9, z: 0.9), forKey: "inputMaxComponents")
-        colorClamp.setValue(CIVector(x: 0.2, y: 0.2, z: 0.2), forKey: "inputMinComponents")
 
-        let composite = CIFilter(name:"CIHardBlendMode")
+        let colorClamp = CIFilter(name: "CIColorClamp")
+        colorClamp.setValue(CIVector(x: 0.9, y: 0.9, z: 0.9, w: 0.9), forKey: "inputMaxComponents")
+        colorClamp.setValue(CIVector(x: 0.2, y: 0.2, z: 0.2, w: 0.2), forKey: "inputMinComponents")
+
+        let composite = CIFilter(name: "CIHardLightBlendMode")
         composite.setValue(sepia.outputImage, forKey: kCIInputImageKey)
-
+        
         let vignette = CIFilter(name: "CIVignette")
         vignette.setValue(composite.outputImage, forKey: kCIInputImageKey)
-        vignette.setValue(kIntensity*2, forKey: kCIInputIntensityKey)
-        vignette.setValue(kIntensity*30, forKey: kCIInputRadiusKey)
+        vignette.setValue(kIntensity * 2, forKey: kCIInputIntensityKey)
+        vignette.setValue(kIntensity * 30, forKey: kCIInputRadiusKey)
 
-        ciFilters = [blur, instant, noir, transfer, unsharpen, monochrome, colorControls, sepia, colorClamp, composite, vignette]
+        return [blur, instant, noir, transfer, unsharpen, monochrome, colorControls, sepia, colorClamp, composite, vignette]
 
-        return ciFilters
+    }
+
+    func filteredImageFromImage(imageData:NSData, withFilterName filter:CIFilter) -> UIImage {
+        let unfilteredImage = CIImage(data: imageData)
+        filter.setValue(unfilteredImage, forKey: kCIInputImageKey)
+
+        let filteredImage:CIImage = filter.outputImage
+        let extent = filteredImage.extent()
+
+        let cgImage:CGImageRef = context.createCGImage(filteredImage, fromRect: extent)
+        let finalImage = UIImage(CGImage: cgImage)
+
+        return finalImage!
+
     }
 }
