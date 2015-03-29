@@ -35,7 +35,7 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.collectionView.registerClass(FilterCell.self, forCellWithReuseIdentifier: "myCell")
 
         self.filters = photoFilters()
-        //println("Filter count: \(filters.count)")
+        println("Filter count: \(filters.count)")
         
     }
 
