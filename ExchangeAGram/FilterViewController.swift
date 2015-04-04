@@ -54,9 +54,16 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         let cell:FilterCell = collectionView.dequeueReusableCellWithReuseIdentifier("myCell", forIndexPath: indexPath) as FilterCell
         
         //cell.imageView.image = UIImage(named: "Placeholder.png")
-        cell.imageView.image = filteredImageFromImage(self.thisFeedItem.image, withFilterName: filters[indexPath.row])
 
+        // Grand Central Dispatch
+        let filterQueue:dispatch_queue_t = dispatch_queue_create("filter queue", nil)
+        dispatch_async(filterQueue, { () -> Void in
+            let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, withFilterName: self.filters[indexPath.row])
 
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                cell.imageView.image = filterImage
+            })
+        })
         
         return cell
     }
@@ -90,7 +97,10 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         vignette.setValue(kIntensity * 2, forKey: kCIInputIntensityKey)
         vignette.setValue(kIntensity * 30, forKey: kCIInputRadiusKey)
 
-        return [blur, instant, noir, transfer, unsharpen, monochrome, colorControls, sepia, colorClamp, composite, vignette]
+        //return [blur, instant, noir, transfer, unsharpen, monochrome, colorControls, sepia, colorClamp, composite, vignette]
+
+        return [blur, instant, noir, transfer, unsharpen, monochrome, colorControls]
+
 
     }
 
@@ -103,6 +113,8 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
 
         let cgImage:CGImageRef = context.createCGImage(filteredImage, fromRect: extent)
         let finalImage = UIImage(CGImage: cgImage)
+
+        //let finalImage = UIImage(CIImage: filteredImage)
 
         return finalImage!
 

@@ -108,6 +108,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as UIImage
         let imageData = UIImageJPEGRepresentation(image, 1.0)       //Convert the image data into a JPEG
+        let thumbNailData = UIImageJPEGRepresentation(image, 0.4)   //Make a thumbnail
 
         // Do Core Data stuff...
         let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: moc!)
@@ -115,6 +116,7 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
         feedItem.image = imageData!
         feedItem.caption = "Test Caption"
+        feedItem.thumbNail = thumbNailData
         self.appDelegate.saveContext()
 
         // Add the new image to the array, then force UI to update the dimiss the Image Picker Controller
