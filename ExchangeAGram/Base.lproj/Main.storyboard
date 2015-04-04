@@ -6,6 +6,7 @@
     <customFonts key="customFonts">
         <mutableArray key="exljbris - MuseoSans-300.otf">
             <string>MuseoSans-300</string>
+            <string>MuseoSans-300</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -76,6 +77,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="M0w-5I-cpZ">
+                        <barButtonItem key="leftBarButtonItem" title="Profile" id="nZy-lr-Bzz">
+                            <connections>
+                                <segue destination="W4Y-0R-0Dq" kind="show" identifier="showProfileSegue" id="MGm-1v-gmq"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="K1L-4U-IRZ">
                             <connections>
                                 <action selector="snapBarButtonItemTapped:" destination="BYZ-38-t0r" id="imi-My-zyv"/>
@@ -89,6 +95,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1269" y="389"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="OV7-Y6-jVG">
+            <objects>
+                <viewController id="W4Y-0R-0Dq" customClass="ProfileViewController" customModule="ExchangeAGram" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uc9-XP-v47"/>
+                        <viewControllerLayoutGuide type="bottom" id="B3K-dc-nJa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="PFI-mp-caK">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xkn-2Q-96f">
+                                <rect key="frame" x="10" y="80" width="100" height="100"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1l-Io-MJ6">
+                                <rect key="frame" x="134" y="80" width="303" height="32"/>
+                                <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="b1l-Io-MJ6" id="GYZ-8f-7FD"/>
+                        <outlet property="profileImageView" destination="Xkn-2Q-96f" id="61j-3C-Cky"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ane-XI-lUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1940" y="389"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="z0d-Ul-tjT">
