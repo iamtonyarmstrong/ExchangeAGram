@@ -13,20 +13,20 @@ import CoreData
 class FeedViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
-
-    let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
-    let moc = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
-
     var feedArray:[AnyObject] = []
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        let request = NSFetchRequest(entityName: "FeedItem")
-        feedArray = self.moc!.executeFetchRequest(request, error: nil)!
+    }
 
+    override func viewWillAppear(animated: Bool) {
+        let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+        let moc = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
+        let request = NSFetchRequest(entityName: "FeedItem")
+        feedArray = moc!.executeFetchRequest(request, error: nil)!
+
+        self.collectionView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -107,17 +107,20 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         let image = info[UIImagePickerControllerOriginalImage] as UIImage
+
         let imageData = UIImageJPEGRepresentation(image, 1.0)       //Convert the image data into a JPEG
         let thumbNailData = UIImageJPEGRepresentation(image, 0.4)   //Make a thumbnail
 
         // Do Core Data stuff...
+        let appDelegate:AppDelegate = (UIApplication.sharedApplication().delegate as AppDelegate)
+        let moc = (UIApplication.sharedApplication().delegate as AppDelegate).managedObjectContext
         let entityDescription = NSEntityDescription.entityForName("FeedItem", inManagedObjectContext: moc!)
-        let feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: self.moc)
+        let feedItem = FeedItem(entity: entityDescription!, insertIntoManagedObjectContext: moc)
 
         feedItem.image = imageData!
         feedItem.caption = "Test Caption"
         feedItem.thumbNail = thumbNailData
-        self.appDelegate.saveContext()
+        appDelegate.saveContext()
 
         // Add the new image to the array, then force UI to update the dimiss the Image Picker Controller
         self.feedArray.append(feedItem)
