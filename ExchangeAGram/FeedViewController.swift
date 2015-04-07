@@ -74,6 +74,11 @@ class FeedViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     // MARK: - Actions
 
+    @IBAction func profileButtonTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("profilePushSegue", sender: nil)
+    }
+
+
     @IBAction func snapBarButtonItemTapped(sender: UIBarButtonItem) {
 
          // How to create the Camera

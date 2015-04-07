@@ -29,10 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        var wasHandled:Bool = FBAppCall.handleOpenURL(url, sourceApplication)
-
-        return wasHandled
+        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication)
     }
+
 
     // Handles clearing the cache when there are memory issues
     func applicationDidReceiveMemoryWarning(application: UIApplication) {

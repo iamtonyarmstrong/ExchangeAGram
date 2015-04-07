@@ -79,7 +79,8 @@
                     <navigationItem key="navigationItem" id="M0w-5I-cpZ">
                         <barButtonItem key="leftBarButtonItem" title="Profile" id="nZy-lr-Bzz">
                             <connections>
-                                <segue destination="W4Y-0R-0Dq" kind="show" identifier="showProfileSegue" id="MGm-1v-gmq"/>
+                                <action selector="profileButtonTapped:" destination="BYZ-38-t0r" id="y2B-SP-KhE"/>
+                                <segue destination="O9O-KL-GhP" kind="show" identifier="profilePushSegue" id="S9A-dF-Q3z"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="camera" id="K1L-4U-IRZ">
@@ -97,37 +98,44 @@
             <point key="canvasLocation" x="1269" y="389"/>
         </scene>
         <!--Profile View Controller-->
-        <scene sceneID="OV7-Y6-jVG">
+        <scene sceneID="EBi-yl-Pa6">
             <objects>
-                <viewController id="W4Y-0R-0Dq" customClass="ProfileViewController" customModule="ExchangeAGram" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="O9O-KL-GhP" customClass="ProfileViewController" customModule="ExchangeAGram" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Uc9-XP-v47"/>
-                        <viewControllerLayoutGuide type="bottom" id="B3K-dc-nJa"/>
+                        <viewControllerLayoutGuide type="top" id="XAk-Zl-kV7"/>
+                        <viewControllerLayoutGuide type="bottom" id="rkG-3y-HJt"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="PFI-mp-caK">
+                    <view key="view" contentMode="scaleToFill" id="J7A-qF-T7f">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xkn-2Q-96f">
-                                <rect key="frame" x="10" y="80" width="100" height="100"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1l-Io-MJ6">
-                                <rect key="frame" x="134" y="80" width="303" height="32"/>
-                                <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="17"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uhZ-qX-QUg" customClass="FBLoginView">
+                                <rect key="frame" x="200" y="388" width="200" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNc-b0-1FH">
+                                <rect key="frame" x="164" y="151" width="420" height="28"/>
+                                <fontDescription key="fontDescription" name="MuseoSans-300" family="Museo Sans" pointSize="18"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1e8-cM-HFD">
+                                <rect key="frame" x="35" y="95" width="96" height="96"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="nameLabel" destination="b1l-Io-MJ6" id="GYZ-8f-7FD"/>
-                        <outlet property="profileImageView" destination="Xkn-2Q-96f" id="61j-3C-Cky"/>
+                        <outlet property="fbLoginView" destination="uhZ-qX-QUg" id="Y39-6O-1p0"/>
+                        <outlet property="nameLabel" destination="bNc-b0-1FH" id="bBv-DA-UdK"/>
+                        <outlet property="profileImageView" destination="1e8-cM-HFD" id="RFZ-AV-ZH5"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ane-XI-lUt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yME-6x-pwZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1940" y="389"/>
+            <point key="canvasLocation" x="1966" y="389"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="z0d-Ul-tjT">
