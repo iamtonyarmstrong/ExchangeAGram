@@ -76,17 +76,21 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
 
     // UICollectionViewDelegate
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, withFilterName: self.filters[indexPath.row])
-        let imageData = UIImageJPEGRepresentation(filterImage, 1.0)
-        self.thisFeedItem.image = imageData
 
-        let thumbnailData = UIImageJPEGRepresentation(filterImage, 0.5)
-        self.thisFeedItem.thumbNail = thumbnailData
+        createUIAlertController()
 
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        appDelegate.saveContext()
 
-        self.navigationController?.popViewControllerAnimated(true)
+//        let filterImage = self.filteredImageFromImage(self.thisFeedItem.image, withFilterName: self.filters[indexPath.row])
+//        let imageData = UIImageJPEGRepresentation(filterImage, 1.0)
+//        self.thisFeedItem.image = imageData
+//
+//        let thumbnailData = UIImageJPEGRepresentation(filterImage, 0.5)
+//        self.thisFeedItem.thumbNail = thumbnailData
+//
+//        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        appDelegate.saveContext()
+//
+//        self.navigationController?.popViewControllerAnimated(true)
     }
 
 
@@ -136,6 +140,28 @@ class FilterViewController: UIViewController, UICollectionViewDataSource, UIColl
         //let finalImage = UIImage(CIImage: filteredImage)
 
         return finalImage!
+
+    }
+
+    // Create a UIAlertControllers
+    func createUIAlertController() -> (){
+        let alert = UIAlertController(title: "Photo Options", message: "Please choose an option", preferredStyle: .Alert)
+        alert.addTextFieldWithConfigurationHandler { (textField) -> Void in
+            textField.placeholder = "Add caption"
+            textField.secureTextEntry = false
+        }
+
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
+    func createSimpleUIAlertController() -> (){
+        let newAlert = UIAlertController(title: "Test", message: "New Alert", preferredStyle: .Alert)
+        let go = UIAlertAction(title: "Tap Me", style: UIAlertActionStyle.Default, handler: nil)
+        let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        newAlert.addAction(go)
+        newAlert.addAction(cancel)
+
+        self.presentViewController(newAlert, animated: true, completion: nil)
 
     }
 
